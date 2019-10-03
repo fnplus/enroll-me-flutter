@@ -1,4 +1,3 @@
-import 'package:enroll_me/app/widgets/detailBox.dart';
 import 'package:flutter/material.dart';
 import 'package:groovin_widgets/groovin_widgets.dart';
 
@@ -6,7 +5,6 @@ class UserDetailsView extends StatefulWidget {
   @override
   _UserDetailsViewState createState() => _UserDetailsViewState();
 }
-
 class _UserDetailsViewState extends State<UserDetailsView> {
   @override
   Widget build(BuildContext context) {
