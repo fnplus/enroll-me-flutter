@@ -22,6 +22,13 @@ dependencies:
   # Includes iOS icons
   cupertino_icons: ^0.1.2
 
+  #For making chat bubbles like in whatsapp (https://pub.dev/packages/bubble)
+  bubble: ^1.1.9+1
+
+  groovin_widgets: ^1.4.2
+
+  liquid_pull_to_refresh: ^1.1.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

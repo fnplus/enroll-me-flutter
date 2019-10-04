@@ -1,4 +1,5 @@
 import 'package:enroll_me/app/ui/pages/homepage.dart';
+import 'package:enroll_me/app/ui/pages/userDetailsView.dart';
 import 'package:flutter/material.dart';
 
 class EnrollMe extends StatelessWidget {
@@ -8,14 +9,17 @@ class EnrollMe extends StatelessWidget {
       title: 'Enroll Me',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.purple,
+        primarySwatch: Colors.teal,
         brightness: Brightness.light,
       ),
       darkTheme: ThemeData.dark(),
-      initialRoute: '/',
+      initialRoute: '/userDetails',
       routes: {
         '/' : (context) {
           return HomePage();
+        },
+        '/userDetails' : (context) {
+          return UserDetailsView();
         }
       },
     );
