@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tags/tag.dart';
 
 class ScoreCard extends StatelessWidget {
-  List<String> _groups = [
+  final List<String> _groups = [
     "Aggregrate",
     "NativeDev",
     "WebDev",
@@ -14,7 +14,7 @@ class ScoreCard extends StatelessWidget {
     "ML\/DS",
   ];
 
-  List<int> _scores = [150, 30, 50, 70, 40, 10, 60, 20, 0];
+  final List<int> _scores = [150, 30, 50, 70, 40, 10, 60, 20, 0];
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +49,12 @@ class ScoreCard extends StatelessWidget {
                 index: index,
                 title: _groups[index] + ': ${_scores[index].toString()}',
                 active: true,
+                color: Colors.indigo,
+                textColor: Colors.white,
+                elevation: 3,
+                pressEnabled: false,
+                onPressed: null,
+                onLongPressed: null,
               ),
             );
           },

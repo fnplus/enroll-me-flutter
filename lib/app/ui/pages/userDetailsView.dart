@@ -1,4 +1,5 @@
 import 'package:enroll_me/app/widgets/materialCard.dart';
+import 'package:enroll_me/app/widgets/profilePageHeader.dart';
 import 'package:enroll_me/app/widgets/profileSettingsCard.dart';
 import 'package:enroll_me/app/widgets/scoreCard.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,7 @@ class _UserDetailsViewState extends State<UserDetailsView> {
           "PROFILE",
           style: TextStyle(letterSpacing: 3),
         ),
+        centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.transparent,
         actions: <Widget>[
@@ -32,49 +34,7 @@ class _UserDetailsViewState extends State<UserDetailsView> {
       headerColor: Colors.indigo,
       headerFlex: 2,
       bodyFlex: 5,
-      header: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          CircleAvatar(
-            child: Container(
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                      image: NetworkImage(
-                          "https://avatars3.githubusercontent.com/u/32771322?s=460&v=4"))),
-            ),
-            radius: 40,
-            backgroundColor: Colors.yellow,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  "Pratik Singhal",
-                  style: TextStyle(color: Colors.white, fontSize: 30),
-                ),
-              ),
-              CircleAvatar(
-                backgroundColor: Colors.green,
-                child: Icon(
-                  Icons.done,
-                  size: 15,
-                ),
-                radius: 10,
-              )
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              "singhalpratik037@gmail.com",
-              style: TextStyle(color: Colors.white, fontSize: 20),
-            ),
-          ),
-        ],
-      ),
+      header: ProfilePageHeader(),
 //***************************************** */
       //BODY STARTS HERE
 //***************************************** */
@@ -87,7 +47,7 @@ class _UserDetailsViewState extends State<UserDetailsView> {
             ),
             Center(
               child: MaterialCardWidget(
-                child: ProfileSettingsCard(),
+                child: ScoreCard(),
               ),
             ),
             SizedBox(
@@ -95,7 +55,7 @@ class _UserDetailsViewState extends State<UserDetailsView> {
             ),
             Center(
               child: MaterialCardWidget(
-                child: ScoreCard(),
+                child: ProfileSettingsCard(),
               ),
             ),
             SizedBox(
