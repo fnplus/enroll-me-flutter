@@ -1,3 +1,4 @@
+import 'package:enroll_me/app/ui/pages/geekForm.dart';
 import 'package:enroll_me/app/ui/pages/homepage.dart';
 import 'package:enroll_me/app/ui/pages/userDetailsView.dart';
 import 'package:flutter/material.dart';
@@ -15,12 +16,15 @@ class EnrollMe extends StatelessWidget {
       darkTheme: ThemeData.dark(),
       initialRoute: '/userDetails',
       routes: {
-        '/' : (context) {
+        '/': (context) {
           return HomePage();
         },
-        '/userDetails' : (context) {
+        '/userDetails': (context) {
           return UserDetailsView();
-        }
+        },
+        '/geekForm': (context) {
+          return GeekForm();
+        },
       },
     );
   }
