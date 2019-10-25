@@ -44,7 +44,7 @@ class ScoreCard extends StatelessWidget {
               padding: const EdgeInsets.all(2.0),
               child: ItemTags(
                 activeColor: Colors.indigo,
-                textStyle: TextStyle(fontSize: 18),
+                textStyle: TextStyle(fontSize: 15),
                 key: Key(index.toString()),
                 index: index,
                 title: _groups[index] + ': ${_scores[index].toString()}',
