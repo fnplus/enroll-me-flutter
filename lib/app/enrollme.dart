@@ -1,4 +1,5 @@
 import 'package:enroll_me/app/ui/pages/geekForm.dart';
+import 'package:enroll_me/app/ui/pages/homePage.dart';
 import 'package:enroll_me/app/ui/pages/signUpPage.dart';
 import 'package:enroll_me/app/ui/pages/userDetailsView.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,9 @@ class _EnrollMeState extends State<EnrollMe> {
       routes: {
         '/': (context) {
           return SignUpPage();
+        },
+        'homePage': (context) {
+          return HomePage();
         },
         '/userDetails': (context) {
           return UserDetailsView();

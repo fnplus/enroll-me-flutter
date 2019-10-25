@@ -9,7 +9,7 @@ class GoogleSignUpBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/userDetails');
+        Navigator.pushReplacementNamed(context, 'homePage');
       },
       child: Container(
         width: MediaQuery.of(context).size.width * 0.70,

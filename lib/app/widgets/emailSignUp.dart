@@ -10,7 +10,7 @@ class EmailSignUpBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/geekForm');
+        Navigator.pushReplacementNamed(context, 'homePage');
       },
       child: Container(
         width: MediaQuery.of(context).size.width * 0.70,
