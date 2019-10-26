@@ -1,8 +1,15 @@
-import 'package:enroll_me/app/ui/pages/homepage.dart';
+import 'package:enroll_me/app/ui/pages/geekForm.dart';
+import 'package:enroll_me/app/ui/pages/homePage.dart';
+import 'package:enroll_me/app/ui/pages/signUpPage.dart';
 import 'package:enroll_me/app/ui/pages/userDetailsView.dart';
 import 'package:flutter/material.dart';
 
-class EnrollMe extends StatelessWidget {
+class EnrollMe extends StatefulWidget {
+  @override
+  _EnrollMeState createState() => _EnrollMeState();
+}
+
+class _EnrollMeState extends State<EnrollMe> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -13,14 +20,20 @@ class EnrollMe extends StatelessWidget {
         brightness: Brightness.light,
       ),
       darkTheme: ThemeData.dark(),
-      initialRoute: '/userDetails',
+      initialRoute: '/',
       routes: {
-        '/' : (context) {
+        '/': (context) {
+          return SignUpPage();
+        },
+        'homePage': (context) {
           return HomePage();
         },
-        '/userDetails' : (context) {
+        '/userDetails': (context) {
           return UserDetailsView();
-        }
+        },
+        '/geekForm': (context) {
+          return GeekForm();
+        },
       },
     );
   }
