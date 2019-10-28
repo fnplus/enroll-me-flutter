@@ -60,6 +60,8 @@ class _SignUpPageState extends State<SignUpPage>
                 SizedBox(
                   height: 20,
                 ),
+
+                //TODO: Setup Login Flow Method for all three Buttons
                 GoogleSignUpBtn(),
                 SizedBox(
                   height: 20,
