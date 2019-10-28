@@ -11,107 +11,116 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  Future<bool> _signOut(BuildContext context) {
+    Navigator.of(context).pushReplacementNamed('/');
+  }
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width * 0.45;
     double height = MediaQuery.of(context).size.width * 0.50;
-    return Scaffold(
-      drawer: CustomDrawer(),
-      appBar: AppBar(
-        backgroundColor: Colors.cyan,
-        elevation: 0,
-        iconTheme: IconThemeData(color: Colors.black),
-        title: Text(
-          "MEET UP",
-          style: TextStyle(color: Color(0xFF424b54), letterSpacing: 5),
+    return WillPopScope(
+      onWillPop: (){
+        _signOut(context);
+      },
+          child: Scaffold(
+        drawer: CustomDrawer(),
+        appBar: AppBar(
+          backgroundColor: Colors.cyan,
+          elevation: 0,
+          iconTheme: IconThemeData(color: Colors.black),
+          title: Text(
+            "MEET UP",
+            style: TextStyle(color: Color(0xFF424b54), letterSpacing: 5),
+          ),
+          centerTitle: true,
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(FontAwesomeIcons.graduationCap),
+              color: Color(0xFF424b54),
+              onPressed: () {
+                Navigator.of(context).pushNamed("/userDetails");
+              },
+            )
+          ],
         ),
-        centerTitle: true,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(FontAwesomeIcons.graduationCap),
-            color: Color(0xFF424b54),
-            onPressed: () {
-              Navigator.of(context).pushNamed("/userDetails");
-            },
-          )
-        ],
-      ),
-      body: SingleChildScrollView(
-              child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              child: Stack(
-                alignment: Alignment.center,
-                children: <Widget>[
-                  ClipPath(
-                    clipper: WaveClipperTwo(),
-                    child: Container(
-                      height: MediaQuery.of(context).size.height * 0.30,
-                      color: Colors.cyan
+        body: SingleChildScrollView(
+                child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: <Widget>[
+                    ClipPath(
+                      clipper: WaveClipperTwo(),
+                      child: Container(
+                        height: MediaQuery.of(context).size.height * 0.30,
+                        color: Colors.cyan
+                      ),
                     ),
+                    Container(
+                      height: MediaQuery.of(context).size.height * 0.25,
+                      child: SvgPicture.asset("assets/images/homepage.svg"),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height:MediaQuery.of(context).size.height * 0.02 ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+
+                  //TODO: Setup onTap Behaviours for all 4 cards by giving routeName
+                  
+                  CustomCard(
+                    height: height,
+                    width: width,
+                    code: 0xFFfcd0a1,
+                    isDark: false,
+                    text: "Meetups Planned",
+                    imageName: 'teamwork.svg',
+                    routeName: null,
                   ),
-                  Container(
-                    height: MediaQuery.of(context).size.height * 0.25,
-                    child: SvgPicture.asset("assets/images/homepage.svg"),
+                  CustomCard(
+                    code: 0xFF0b3c49,
+                    height: height,
+                    isDark: true,
+                    text: "Create Meetups",
+                    width: width,
+                    imageName: 'create-meetup.svg',
+                    routeName: null,
                   ),
                 ],
               ),
-            ),
-            SizedBox(height:MediaQuery.of(context).size.height * 0.02 ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-
-                //TODO: Setup onTap Behaviours for all 4 cards by giving routeName
-                
-                CustomCard(
-                  height: height,
-                  width: width,
-                  code: 0xFFfcd0a1,
-                  isDark: false,
-                  text: "Meetups Planned",
-                  imageName: 'teamwork.svg',
-                  routeName: null,
-                ),
-                CustomCard(
-                  code: 0xFF0b3c49,
-                  height: height,
-                  isDark: true,
-                  text: "Create Meetups",
-                  width: width,
-                  imageName: 'create-meetup.svg',
-                  routeName: null,
-                ),
-              ],
-            ),
-            SizedBox(height:MediaQuery.of(context).size.height * 0.02 ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                CustomCard(
-                  code: 0xFF401f3e,
-                  height: height,
-                  isDark: true,
-                  text: "Join Meetups",
-                  width: width,
-                  imageName: 'teamwork.svg',
-                  routeName: null,
-                ),
-                CustomCard(
-                  code: 0xFFd8d4f2,
-                  height: height,
-                  isDark: false,
-                  text: "Something",
-                  width: width,
-                  imageName: 'card.svg',
-                  routeName: null,
-                ),
-              ],
-            ),
-            SizedBox(height:MediaQuery.of(context).size.height * 0.02 ),
-          ],
+              SizedBox(height:MediaQuery.of(context).size.height * 0.02 ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  CustomCard(
+                    code: 0xFF401f3e,
+                    height: height,
+                    isDark: true,
+                    text: "Join Meetups",
+                    width: width,
+                    imageName: 'teamwork.svg',
+                    routeName: null,
+                  ),
+                  CustomCard(
+                    code: 0xFFd8d4f2,
+                    height: height,
+                    isDark: false,
+                    text: "Something",
+                    width: width,
+                    imageName: 'card.svg',
+                    routeName: null,
+                  ),
+                ],
+              ),
+              SizedBox(height:MediaQuery.of(context).size.height * 0.02 ),
+            ],
+          ),
         ),
       ),
     );
