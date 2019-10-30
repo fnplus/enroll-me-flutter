@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "654403546058",
+    "firebase_url": "https://enroll-me-66031.firebaseio.com",
+    "project_id": "enroll-me-66031",
+    "storage_bucket": "enroll-me-66031.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:654403546058:android:533a9f6c1e62f1178d3d33",
+        "android_client_info": {
+          "package_name": "tech.fnplus.enroll_me"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "654403546058-4tum3k5o7hlejubetp8mejiempb658sa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tech.fnplus.enroll_me",
+            "certificate_hash": "607c8ae34bcc1a2283ab5e84b420839069867190"
+          }
+        },
+        {
+          "client_id": "654403546058-e8aqvcc0j7s6vp8q39logo8jjcko9ipt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqYETFZ2jbQIlZOSPtF7ICnYLXvJvYd1Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "654403546058-e8aqvcc0j7s6vp8q39logo8jjcko9ipt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
