@@ -12,6 +12,14 @@ This cross-platform application is being developed for the Android and iOS platf
 6) Organise Quizzes in the app
 7) The meetups will be integrated with the [Meetup API](https://www.meetup.com/meetup_api/)
 
+## Running the App
+The app makes use of Firebase, so in order to run or build this application you will have to:
+
+1. Create a new firebase project
+2. Add the android application to the project
+3. Just download the google-services.json file and place it in `android/app` directory.
+4. Make sure that the google-services.json file is not checked into version control.
+5. Keep a backup of the file, just in case you lose the local version of your project.
 
 ## Contributing
 
