@@ -25,17 +25,29 @@ dependencies:
   #For making chat bubbles like in whatsapp (https://pub.dev/packages/bubble)
   bubble: ^1.1.9+1
 
+  # ui elements and layouts
   groovin_widgets: ^1.4.2
 
+  # custom animated pull to refresh indicator
   liquid_pull_to_refresh: ^1.1.1
 
+  # ui elements to display profile tags
   flutter_tags: ^0.4.3
 
+  # to use svg inside flutte project
   flutter_svg: ^0.14.3
 
+  # extended icon library for flutter
   font_awesome_flutter: ^8.5.0
 
+  # to get different custom shapes and borders
   flutter_custom_clippers: ^1.1.0
+
+  # To authenticate users
+  firebase_auth: ^0.14.0+5
+
+  # database for app
+  cloud_firestore: ^0.12.9+6
 
 dev_dependencies:
   flutter_test:
