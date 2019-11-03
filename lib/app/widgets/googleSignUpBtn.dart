@@ -1,15 +1,38 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:enroll_me/app/services/googleAuthenticationService.dart';
+import 'package:enroll_me/app/ui/pages/homePage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class GoogleSignUpBtn extends StatelessWidget {
-  const GoogleSignUpBtn({
-    Key key,
-  }) : super(key: key);
-
+  final GoogleAuthenticationService gAuth = GoogleAuthenticationService();
+  final databaseReference = Firestore.instance;
+  FirebaseUser user;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.pushReplacementNamed(context, 'homePage');
+      onTap: () async {
+        FirebaseUser result = await gAuth.handleGoogleSignIn();
+        if (result == null) {
+          print("Error Signing in. Try again");
+        } else {
+          print("User receieved: " + result.displayName);
+          user = result;
+          DocumentReference ref =
+              await databaseReference.collection("users").add({
+            'uid': result.uid,
+            'email': result.email,
+            'name': result.displayName,
+          }).then((_) {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (context) => HomePage(
+                  user: user,
+                ),
+              ),
+            );
+          });
+        }
       },
       child: Container(
         width: MediaQuery.of(context).size.width * 0.70,

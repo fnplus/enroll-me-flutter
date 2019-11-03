@@ -1,9 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class CustomDrawer extends StatelessWidget {
-  const CustomDrawer({
-    Key key,
-  }) : super(key: key);
+  final FirebaseUser user;
+
+  const CustomDrawer({Key key, this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,23 +13,13 @@ class CustomDrawer extends StatelessWidget {
         children: <Widget>[
           UserAccountsDrawerHeader(
             decoration: BoxDecoration(color: Color(0xFF424b54)),
-            currentAccountPicture: Container(
-              height: 100,
-              width: 100,
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                    image: NetworkImage(
-                      "https://avatars3.githubusercontent.com/u/32771322?s=460&v=4",
-                    ),
-                  )),
-            ),
+            currentAccountPicture: CircleAvatar(child: Image.network(user.photoUrl),),
             accountEmail: Text(
-              "singhalpratik037@gmail.com",
+              user.email,
               style: TextStyle(fontSize: 16),
             ),
             accountName: Text(
-              "Pratik Singhal",
+              user.displayName,
               style: TextStyle(fontSize: 16),
             ),
           ),
