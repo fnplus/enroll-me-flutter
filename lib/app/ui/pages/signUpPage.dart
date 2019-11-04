@@ -1,6 +1,7 @@
 import 'package:enroll_me/app/widgets/emailSignUp.dart';
 import 'package:enroll_me/app/widgets/fbSignUpBtn.dart';
 import 'package:enroll_me/app/widgets/googleSignUpBtn.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -13,9 +14,11 @@ class _SignUpPageState extends State<SignUpPage>
     with SingleTickerProviderStateMixin {
   Animation animation;
   AnimationController animationController;
+
   
   @override
   void initState() {
+  
     super.initState();
     animationController = AnimationController(
       duration: Duration(seconds: 3, milliseconds: 5),

@@ -56,7 +56,9 @@ class CustomDrawer extends StatelessWidget {
                     "Sign Out",
                     style: TextStyle(fontSize: 16),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    
+                  },
                 )
               ],
             ),

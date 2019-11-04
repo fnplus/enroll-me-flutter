@@ -29,7 +29,7 @@ class _EnrollMeState extends State<EnrollMe> {
         '/signup': (context) {
           return SignUpPage();
         },
-        'homePage': (context) {
+        '/homePage': (context) {
           return HomePage();
         },
         '/userDetails': (context) {
