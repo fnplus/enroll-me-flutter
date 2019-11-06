@@ -1,5 +1,7 @@
 # Project Enroll Me
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/cd351b0a24eb4d84bb825492690d09a7)](https://www.codacy.com/manual/fnplus/enroll-me-flutter?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=fnplus/enroll-me-flutter&amp;utm_campaign=Badge_Grade)
+
 This cross-platform application is being developed for the Android and iOS platforms using the Flutter SDK by Google. The idea behind this app is make it a one-stop solution for any community to smoothly organise meetups. 
 
 ## Features (Proposed)
