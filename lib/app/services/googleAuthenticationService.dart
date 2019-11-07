@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class GoogleAuthenticationService {
+
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -24,7 +25,7 @@ class GoogleAuthenticationService {
 
       return user;
     } catch (e) {
-      print("Error caught: " +e.toString() + " Yes until here");
+      print("Error caught: " + e.toString() + " Yes until here");
       return null;
     }
   }

@@ -1,3 +1,4 @@
+import 'package:enroll_me/app/ui/pages/emailSignInPage.dart';
 import 'package:enroll_me/app/ui/pages/geekForm.dart';
 import 'package:enroll_me/app/ui/pages/homePage.dart';
 import 'package:enroll_me/app/ui/pages/loadingPage.dart';
@@ -13,32 +14,41 @@ class EnrollMe extends StatefulWidget {
 class _EnrollMeState extends State<EnrollMe> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Enroll Me',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.teal,
-        brightness: Brightness.light,
-      ),
-      darkTheme: ThemeData.dark(),
-      initialRoute: '/',
-      routes: {
-        '/': (context) {
-          return LoadingPage();
-        },
-        '/signup': (context) {
-          return SignUpPage();
-        },
-        '/homePage': (context) {
-          return HomePage();
-        },
-        '/userDetails': (context) {
-          return UserDetailsView();
-        },
-        '/geekForm': (context) {
-          return GeekForm();
-        },
+    return GestureDetector(
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+        if (!currentFocus.hasPrimaryFocus) {
+          currentFocus.unfocus();
+        }
       },
+      child: MaterialApp(
+        title: 'Enroll Me',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.teal,
+          brightness: Brightness.light,
+        ),
+        darkTheme: ThemeData.dark(),
+        initialRoute: '/',
+        routes: {
+          '/': (context) {
+            return LoadingPage();
+          },
+          '/signup': (context) {
+            return SignUpPage();
+          },
+          '/homePage': (context) {
+            return HomePage();
+          },
+          '/userDetails': (context) {
+            return UserDetailsView();
+          },
+          '/geekForm': (context) {
+            return GeekForm();
+          },
+          '/emailPage': (context) => EmailSignInPage(),
+        },
+      ),
     );
   }
 }

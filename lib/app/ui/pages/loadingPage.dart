@@ -12,6 +12,7 @@ class _LoadingPageState extends State<LoadingPage> {
   @override
   void initState() {
     //here it is
+    //we are good to go
     FirebaseAuth.instance.currentUser().then((currentUser) => {
           if (currentUser == null)
             {Navigator.pushReplacementNamed(context, '/signup')}

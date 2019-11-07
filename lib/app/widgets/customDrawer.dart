@@ -57,7 +57,7 @@ class CustomDrawer extends StatelessWidget {
                     style: TextStyle(fontSize: 16),
                   ),
                   onTap: () {
-                    
+                    // here I want to implement the signout function I wrote in googleAuthentication file
                   },
                 )
               ],

@@ -3,16 +3,19 @@ import 'package:enroll_me/app/services/googleAuthenticationService.dart';
 import 'package:enroll_me/app/ui/pages/homePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class GoogleSignUpBtn extends StatelessWidget {
-  final GoogleAuthenticationService gAuth = GoogleAuthenticationService();
   final databaseReference = Firestore.instance;
   FirebaseUser user;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
+        final gAuth = Provider.of<GoogleAuthenticationService>(context);
+
         FirebaseUser result = await gAuth.handleGoogleSignIn();
+
         if (result == null) {
           print("Error Signing in. Try again");
         } else {
