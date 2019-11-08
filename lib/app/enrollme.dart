@@ -1,10 +1,13 @@
+import 'package:enroll_me/app/services/authenticationService.dart';
 import 'package:enroll_me/app/ui/pages/emailSignInPage.dart';
+import 'package:enroll_me/app/ui/pages/emailSignUpPage.dart';
 import 'package:enroll_me/app/ui/pages/geekForm.dart';
 import 'package:enroll_me/app/ui/pages/homePage.dart';
 import 'package:enroll_me/app/ui/pages/loadingPage.dart';
 import 'package:enroll_me/app/ui/pages/signUpPage.dart';
 import 'package:enroll_me/app/ui/pages/userDetailsView.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class EnrollMe extends StatefulWidget {
   @override
@@ -12,6 +15,14 @@ class EnrollMe extends StatefulWidget {
 }
 
 class _EnrollMeState extends State<EnrollMe> {
+  AuthenticationService _authenticationService;
+
+  @override
+  void initState() {
+    _authenticationService = AuthenticationService();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -21,33 +32,31 @@ class _EnrollMeState extends State<EnrollMe> {
           currentFocus.unfocus();
         }
       },
-      child: MaterialApp(
-        title: 'Enroll Me',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primarySwatch: Colors.teal,
-          brightness: Brightness.light,
+      child: MultiProvider(
+        providers: [
+          ChangeNotifierProvider<AuthenticationService>(
+            builder: (_) => _authenticationService,
+          ),
+        ],
+        child: MaterialApp(
+          title: 'Enroll Me',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            primarySwatch: Colors.teal,
+            brightness: Brightness.light,
+          ),
+          darkTheme: ThemeData.dark(),
+          initialRoute: '/',
+          routes: {
+            '/': (context) => LoadingPage(authService: _authenticationService),
+            '/signup': (context) => SignUpPage(),
+            '/homePage': (context) => HomePage(),
+            '/userDetails': (context) => UserDetailsView(),
+            '/geekForm': (context) => GeekForm(),
+            '/emailPage': (context) => EmailSignInPage(),
+            '/emailSignUp': (context) => EmailSignUpPage()
+          },
         ),
-        darkTheme: ThemeData.dark(),
-        initialRoute: '/',
-        routes: {
-          '/': (context) {
-            return LoadingPage();
-          },
-          '/signup': (context) {
-            return SignUpPage();
-          },
-          '/homePage': (context) {
-            return HomePage();
-          },
-          '/userDetails': (context) {
-            return UserDetailsView();
-          },
-          '/geekForm': (context) {
-            return GeekForm();
-          },
-          '/emailPage': (context) => EmailSignInPage(),
-        },
       ),
     );
   }

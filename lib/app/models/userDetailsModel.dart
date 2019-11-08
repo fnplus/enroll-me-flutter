@@ -1,45 +1,29 @@
-class UserDetailsModel {
-  final String firstName;
-  final String middleName;
-  final String lastName;
-  final String emailID;
-  final String gender;
-  final num phoneNumber;
-  final String birthDate;
-  final String city;
-  final String state;
-  final String address;
-  final String githubURL;
-  final String linkedinURL;
+class User {
+  String name;
+  String email;
+  String uid;
+  String avatar;
 
-  UserDetailsModel(
-      {this.firstName,
-      this.middleName,
-      this.lastName,
-      this.emailID,
-      this.gender,
-      this.phoneNumber,
-      this.birthDate,
-      this.city,
-      this.state,
-      this.address,
-      this.githubURL,
-      this.linkedinURL});
+  User({this.name, this.email, this.uid, this.avatar});
 
-  factory UserDetailsModel.fromJSON(Map<String, dynamic> json) {
-    return UserDetailsModel(
-      firstName: json['fname'],
-      middleName: json['mname'] ?? '',
-      lastName: json['lname'],
-      emailID: json['email'],
-      gender: json['gender'],
-      phoneNumber: json['phone'],
-      birthDate: json['birthday'],
-      city: json['city'],
-      state: json['state'],
-      address: json['address'],
-      githubURL: json['github'],
-      linkedinURL: json['linkedin'],
-    );
+  User.fromMap(Map dataMap) {
+    print(dataMap);
+    uid = dataMap['uid'];
+    // id = dataMap['id'];
+    name = dataMap['name'];
+    email = dataMap['email'];
+    avatar = dataMap['avatar'];
+    // privilege = dataMap['privilege'];
+  }
+
+  Map<String, dynamic> toMap() {
+    var userMap = Map<String, dynamic>();
+
+    userMap['uid'] = uid;
+    userMap['name'] = name;
+    userMap['email'] = email;
+    userMap['avatar'] = avatar;
+
+    return userMap;
   }
 }

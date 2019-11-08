@@ -1,25 +1,28 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:enroll_me/app/services/authenticationService.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+
 class CustomDrawer extends StatelessWidget {
-  final FirebaseUser user;
-
-  const CustomDrawer({Key key, this.user}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
+    var _authService = Provider.of<AuthenticationService>(context);
     return Drawer(
       child: Column(
         children: <Widget>[
           UserAccountsDrawerHeader(
             decoration: BoxDecoration(color: Color(0xFF424b54)),
-            currentAccountPicture: CircleAvatar(child: Image.network(user.photoUrl),),
+            currentAccountPicture: CircleAvatar(
+              child: _authService.loggedInUser.avatar != null ? Image.network(
+                _authService.loggedInUser.avatar,
+              ) : Text(_authService.loggedInUser.email[0].toUpperCase()),
+            ),
             accountEmail: Text(
-              user.email,
+              _authService.loggedInUser.email,
               style: TextStyle(fontSize: 16),
             ),
             accountName: Text(
-              user.displayName,
+              _authService.loggedInUser.name!= null ? _authService.loggedInUser.name : "User ",
               style: TextStyle(fontSize: 16),
             ),
           ),
@@ -57,7 +60,7 @@ class CustomDrawer extends StatelessWidget {
                     style: TextStyle(fontSize: 16),
                   ),
                   onTap: () {
-                    // here I want to implement the signout function I wrote in googleAuthentication file
+                    _authService.signOut();
                   },
                 )
               ],

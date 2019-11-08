@@ -26,7 +26,7 @@ class CustomCard extends StatelessWidget {
     return Center(
       child: GestureDetector(
         onTap: () {
-          Navigator.of(context).pushNamed(routeName);
+          // Navigator.of(context).pushNamed(routeName);
         },
         child: Material(
           elevation: 3,

@@ -1,17 +1,17 @@
 import 'package:enroll_me/app/services/authenticationService.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
-class EmailSignInPage extends StatefulWidget {
+class EmailSignUpPage extends StatefulWidget {
   @override
-  _EmailSignInPageState createState() => _EmailSignInPageState();
+  _EmailSignUpPageState createState() => _EmailSignUpPageState();
 }
 
-class _EmailSignInPageState extends State<EmailSignInPage> {
+class _EmailSignUpPageState extends State<EmailSignUpPage> {
   TextEditingController _email = TextEditingController();
-
+  TextEditingController _name = TextEditingController();
   TextEditingController _pass = TextEditingController();
+  TextEditingController _repass = TextEditingController();
 
   @override
   void initState() {
@@ -20,12 +20,13 @@ class _EmailSignInPageState extends State<EmailSignInPage> {
 
   @override
   Widget build(BuildContext context) {
+
     var authService = Provider.of<AuthenticationService>(context);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
-        title: Text("EMAIL LOGIN",
+        title: Text("EMAIL SIGN UP",
             style: TextStyle(
               color: Color(0xFF424b54),
               letterSpacing: 5,
@@ -35,12 +36,13 @@ class _EmailSignInPageState extends State<EmailSignInPage> {
       ),
       resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              child: Column(
           children: <Widget>[
-            Container(
-                height: MediaQuery.of(context).size.height * 0.3,
-                child: SvgPicture.asset("assets/images/emailLogin.svg")),
+            DataField(
+              heading: 'Name',
+              icon: Icons.perm_identity,
+              controller: _name,
+            ),
             DataField(
               heading: 'Email',
               icon: Icons.email,
@@ -51,13 +53,28 @@ class _EmailSignInPageState extends State<EmailSignInPage> {
               icon: Icons.vpn_key,
               controller: _pass,
             ),
+            DataField(
+              heading: 'Retype Password',
+              icon: Icons.vpn_key,
+              controller: _repass,
+            ),
             Padding(
               padding: EdgeInsets.all(8),
               child: RaisedButton(
                 onPressed: () async {
-                  print("Email " + _email.text);
-                  print("Password " + _pass.text);
-                  await authService.signInWithEmail(_email.text, _pass.text);
+                  print("Name received: " + _name.text);
+                  print("Email received: " + _email.text);
+                  print("Pass: " + _pass.text);
+                  print("Re-Pass: " + _repass.text);
+
+                  if (_pass.text.compareTo(_repass.text) == 0) {
+                    print("you may proceed");
+                    await authService.signUpWithEmail(
+                        _name.text, _email.text, _pass.text);
+                  } else {
+                    //TODO: Handle the passwords not match case
+                    print("Both passwords do not match");
+                  }
                 },
                 elevation: 3,
                 child: Text(
@@ -67,12 +84,6 @@ class _EmailSignInPageState extends State<EmailSignInPage> {
                 color: Color(0xFF401f3e),
               ),
             ),
-            InkWell(
-              child: Text("New User? Sign up"),
-              onTap: () {
-                authService.updateSubjectToEmailAuth(true);
-              },
-            )
           ],
         ),
       ),
@@ -94,7 +105,7 @@ class DataField extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
         controller: controller,
-        obscureText: heading == "Password" ? true : false,
+        obscureText: heading.contains("Password") ? true : false,
         decoration: InputDecoration(
           focusedBorder: OutlineInputBorder(
               gapPadding: 20,

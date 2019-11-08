@@ -1,15 +1,12 @@
 import 'package:enroll_me/app/widgets/customCard.dart';
 import 'package:enroll_me/app/widgets/customDrawer.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 
 class HomePage extends StatefulWidget {
-  final FirebaseUser user;
 
-  const HomePage({Key key, this.user}) : super(key: key);
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -20,7 +17,7 @@ class _HomePageState extends State<HomePage> {
     double width = MediaQuery.of(context).size.width * 0.45;
     double height = MediaQuery.of(context).size.width * 0.50;
     return Scaffold(
-      drawer: CustomDrawer(user:this.widget.user),
+      drawer: CustomDrawer(),
       appBar: AppBar(
         backgroundColor: Colors.cyan,
         elevation: 0,

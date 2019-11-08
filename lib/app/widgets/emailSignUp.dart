@@ -1,24 +1,15 @@
-import 'package:enroll_me/app/services/emailAuthService.dart';
+import 'package:enroll_me/app/services/authenticationService.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 class EmailSignUpBtn extends StatelessWidget {
-  final String email,password;
-  const EmailSignUpBtn({Key key, this.email, this.password}) : super(key: key);
-  final bool signIn = false;
   @override
   Widget build(BuildContext context) {
+    var service = Provider.of<AuthenticationService>(context);
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/emailPage');
-      //   if(await EmailAuthService().signIn(email, password)){
-          
-      //   }
-      //   else{
-      //     Navigator.pop(context);
-      //   }
-        
-      // },
+        service.updateSubjectToEmailAuth(false);
       },
       child: Container(
         width: MediaQuery.of(context).size.width * 0.70,
@@ -35,7 +26,7 @@ class EmailSignUpBtn extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(4.0),
               child: Text(
-                "Sign up with Email",
+                "Sign in with Email",
                 style: TextStyle(
                     fontFamily: "Product-Sans",
                     color: Colors.white,

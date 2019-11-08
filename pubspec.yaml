@@ -52,6 +52,9 @@ dependencies:
   #for state management of app
   provider: ^3.1.0+1
 
+  # for reactive programming
+  rxdart: ^0.22.6
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
