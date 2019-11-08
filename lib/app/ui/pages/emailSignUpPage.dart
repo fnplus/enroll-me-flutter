@@ -20,7 +20,6 @@ class _EmailSignUpPageState extends State<EmailSignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-
     var authService = Provider.of<AuthenticationService>(context);
     return Scaffold(
       appBar: AppBar(
@@ -36,7 +35,7 @@ class _EmailSignUpPageState extends State<EmailSignUpPage> {
       ),
       resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
-              child: Column(
+        child: Column(
           children: <Widget>[
             DataField(
               heading: 'Name',
@@ -60,33 +59,81 @@ class _EmailSignUpPageState extends State<EmailSignUpPage> {
             ),
             Padding(
               padding: EdgeInsets.all(8),
-              child: RaisedButton(
-                onPressed: () async {
-                  print("Name received: " + _name.text);
-                  print("Email received: " + _email.text);
-                  print("Pass: " + _pass.text);
-                  print("Re-Pass: " + _repass.text);
-
-                  if (_pass.text.compareTo(_repass.text) == 0) {
-                    print("you may proceed");
-                    await authService.signUpWithEmail(
-                        _name.text, _email.text, _pass.text);
-                  } else {
-                    //TODO: Handle the passwords not match case
-                    print("Both passwords do not match");
-                  }
-                },
-                elevation: 3,
-                child: Text(
-                  "Login",
-                  style: TextStyle(color: Colors.white),
-                ),
-                color: Color(0xFF401f3e),
-              ),
+              child: new RegisterBtn(
+                  name: _name,
+                  email: _email,
+                  pass: _pass,
+                  repass: _repass,
+                  authService: authService),
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class RegisterBtn extends StatelessWidget {
+  const RegisterBtn({
+    Key key,
+    @required TextEditingController name,
+    @required TextEditingController email,
+    @required TextEditingController pass,
+    @required TextEditingController repass,
+    @required this.authService,
+  })  : _name = name,
+        _email = email,
+        _pass = pass,
+        _repass = repass,
+        super(key: key);
+
+  final TextEditingController _name;
+  final TextEditingController _email;
+  final TextEditingController _pass;
+  final TextEditingController _repass;
+  final AuthenticationService authService;
+
+  @override
+  Widget build(BuildContext context) {
+    return RaisedButton(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+      onPressed: () async {
+        print("Name received: " + _name.text);
+        print("Email received: " + _email.text);
+        print("Pass: " + _pass.text);
+        print("Re-Pass: " + _repass.text);
+
+        if (_pass.text.compareTo(_repass.text) == 0) {
+          print("you may proceed");
+          await authService.signUpWithEmail(
+              _name.text, _email.text, _pass.text);
+        } else {
+          // Handle the passwords not match case
+          print("Both passwords do not match");
+          Scaffold.of(context).showSnackBar(SnackBar(
+            backgroundColor: Colors.red,
+            content: Row(
+              children: <Widget>[
+                Icon(Icons.warning),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  "Passwords do not match. Try Again",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ],
+            ),
+            duration: Duration(seconds: 4),
+          ));
+        }
+      },
+      elevation: 3,
+      child: Text(
+        "Register",
+        style: TextStyle(color: Colors.white),
+      ),
+      color: Color(0xFF401f3e),
     );
   }
 }

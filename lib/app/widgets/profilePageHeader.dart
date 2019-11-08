@@ -1,8 +1,10 @@
+import 'package:enroll_me/app/models/userDetailsModel.dart';
 import 'package:flutter/material.dart';
 class ProfilePageHeader extends StatelessWidget {
-  const ProfilePageHeader({
-    Key key,
-  }) : super(key: key);
+  final User user;
+
+  const ProfilePageHeader({Key key, this.user}) : super(key: key);
+  
 
   @override
   Widget build(BuildContext context) {
@@ -10,13 +12,12 @@ class ProfilePageHeader extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
         CircleAvatar(
-          child: Container(
+          child: user.avatar!= null ? Container(
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(
-                    image: NetworkImage(
-                        "https://avatars3.githubusercontent.com/u/32771322?s=460&v=4"))),
-          ),
+                    image: NetworkImage(user.avatar))),
+          ): Text(user.name[0].toUpperCase()),
           radius: 40,
           backgroundColor: Colors.yellow,
         ),
@@ -26,7 +27,7 @@ class ProfilePageHeader extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                "Pratik Singhal",
+                user.name,
                 style: TextStyle(color: Colors.white, fontSize: 30),
               ),
             ),
@@ -43,7 +44,7 @@ class ProfilePageHeader extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            "singhalpratik037@gmail.com",
+            user.email,
             style: TextStyle(color: Colors.white, fontSize: 20),
           ),
         ),

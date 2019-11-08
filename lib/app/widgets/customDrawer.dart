@@ -11,18 +11,32 @@ class CustomDrawer extends StatelessWidget {
       child: Column(
         children: <Widget>[
           UserAccountsDrawerHeader(
+            onDetailsPressed: () {
+              //TODO: Navigate to page where user can update their details
+            },
             decoration: BoxDecoration(color: Color(0xFF424b54)),
             currentAccountPicture: CircleAvatar(
-              child: _authService.loggedInUser.avatar != null ? Image.network(
-                _authService.loggedInUser.avatar,
-              ) : Text(_authService.loggedInUser.email[0].toUpperCase()),
+              child: Container(
+                child: _authService.loggedInUser.avatar != null
+                    ? Container(
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                                image: NetworkImage(
+                                    _authService.loggedInUser.avatar),
+                                fit: BoxFit.fill)),
+                      )
+                    : Text(_authService.loggedInUser.name[0].toUpperCase()),
+              ),
             ),
             accountEmail: Text(
               _authService.loggedInUser.email,
               style: TextStyle(fontSize: 16),
             ),
             accountName: Text(
-              _authService.loggedInUser.name!= null ? _authService.loggedInUser.name : "User ",
+              _authService.loggedInUser.name != null
+                  ? _authService.loggedInUser.name
+                  : "User ",
               style: TextStyle(fontSize: 16),
             ),
           ),
@@ -60,7 +74,28 @@ class CustomDrawer extends StatelessWidget {
                     style: TextStyle(fontSize: 16),
                   ),
                   onTap: () {
-                    _authService.signOut();
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                              title: Text("Sign out"),
+                              content:
+                                  Text("Are you sure you want to sign out?"),
+                              actions: <Widget>[
+                                FlatButton(
+                                  child: Text("Cancel"),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                                FlatButton(
+                                  child: Text("Yes"),
+                                  onPressed: () {
+                                    _authService.signOut();
+                                    Navigator.pop(context);
+                                  },
+                                )
+                              ],
+                            ));
                   },
                 )
               ],

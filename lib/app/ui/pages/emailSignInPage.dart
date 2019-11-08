@@ -53,26 +53,22 @@ class _EmailSignInPageState extends State<EmailSignInPage> {
             ),
             Padding(
               padding: EdgeInsets.all(8),
-              child: RaisedButton(
-                onPressed: () async {
-                  print("Email " + _email.text);
-                  print("Password " + _pass.text);
-                  await authService.signInWithEmail(_email.text, _pass.text);
-                },
-                elevation: 3,
-                child: Text(
-                  "Login",
-                  style: TextStyle(color: Colors.white),
-                ),
-                color: Color(0xFF401f3e),
-              ),
+              child: new LoginBtn(
+                  email: _email, pass: _pass, authService: authService),
+            ),
+            SizedBox(
+              height: 15,
             ),
             InkWell(
-              child: Text("New User? Sign up"),
-              onTap: () {
+              child: Text("New User? Sign up", style: TextStyle(fontSize: 18)),
+              onTap: () async {
                 authService.updateSubjectToEmailAuth(true);
               },
-            )
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            new ForgotPass(email: _email, authService: authService)
           ],
         ),
       ),
@@ -80,6 +76,106 @@ class _EmailSignInPageState extends State<EmailSignInPage> {
   }
 }
 
+//LOGIN BUTTON
+class LoginBtn extends StatelessWidget {
+  const LoginBtn({
+    Key key,
+    @required TextEditingController email,
+    @required TextEditingController pass,
+    @required this.authService,
+  })  : _email = email,
+        _pass = pass,
+        super(key: key);
+
+  final TextEditingController _email;
+  final TextEditingController _pass;
+  final AuthenticationService authService;
+
+  @override
+  Widget build(BuildContext context) {
+    return RaisedButton(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+      onPressed: () async {
+        print("Email " + _email.text);
+        print("Password " + _pass.text);
+        if (_email.text.isNotEmpty && _pass.text.isNotEmpty) {
+          await authService.signInWithEmail(_email.text, _pass.text);
+        } 
+        else if (_email.text.isEmpty && _pass.text.isEmpty) {
+          Scaffold.of(context).showSnackBar(SnackBar(
+            content: Text("Enter valid Email and Password"),
+          ));
+        } 
+        else if (_email.text.isEmpty) {
+          Scaffold.of(context).showSnackBar(SnackBar(
+            content: Text("Please enter a valid Email ID"),
+          ));
+        } 
+        else if (_pass.text.isEmpty) {
+          Scaffold.of(context).showSnackBar(SnackBar(
+            content: Text("Password cannot be empty"),
+          ));
+        }
+      },
+      elevation: 3,
+      child: Text(
+        "Login",
+        style: TextStyle(color: Colors.white),
+      ),
+      color: Color(0xFF401f3e),
+    );
+  }
+}
+
+// FOGOT PASSWORD BUTTON
+class ForgotPass extends StatelessWidget {
+  const ForgotPass({
+    Key key,
+    @required TextEditingController email,
+    @required this.authService,
+  })  : _email = email,
+        super(key: key);
+
+  final TextEditingController _email;
+  final AuthenticationService authService;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      child: Text(
+        "Forgot Password?",
+        style: TextStyle(fontSize: 18),
+      ),
+      onTap: () async {
+        if (_email.text.isNotEmpty) {
+          await authService.resetPass(_email.text);
+        } else {
+          // Show snackbar if email field is not filled
+          Scaffold.of(context).showSnackBar(SnackBar(
+            backgroundColor: Colors.red,
+            content: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Icon(Icons.warning),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  "Please fill the Email ID",
+                  style: TextStyle(color: Colors.white, fontSize: 15),
+                ),
+              ],
+            ),
+            duration: Duration(seconds: 3),
+          ));
+        }
+      },
+    );
+  }
+}
+
+// REFACTORED TEXT FIELD FOR INPUT
 class DataField extends StatelessWidget {
   final String heading;
   final IconData icon;

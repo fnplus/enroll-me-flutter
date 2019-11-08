@@ -115,12 +115,17 @@ class AuthenticationService extends ChangeNotifier {
 
       await user.reload();
       user = await _auth
-          .currentUser(); //(referred from https://stackoverflow.com/questions/50986191/flutter-firebase-auth-updateprofile-method-is-not-working)
+          .currentUser(); 
+    //(referred from https://stackoverflow.com/questions/50986191/flutter-firebase-auth-updateprofile-method-is-not-working)
 
       print("After reloading the profile: ");
       print(user.displayName);
+      // await user.sendEmailVerification();
 
+      // user.isEmailVerified
+      //     ? 
       await processFirestoreEntryOfUser(user);
+          // : print("Email Not verified"); //TODO: Handle the not verified condition
 
       updateAuthState();
     } catch (e) {
@@ -129,7 +134,18 @@ class AuthenticationService extends ChangeNotifier {
     }
   }
 
-  //GOOGLE SIGN IN FUNCTION
+  Future verifyEmail()async{
+    FirebaseUser user = await _auth.currentUser();
+    await user.sendEmailVerification();
+  }
+
+  Future resetPass(String email)async{
+    _authStateSubject.add(AuthState.Processing);
+    await _auth.sendPasswordResetEmail(email: email);
+    updateSubjectToEmailAuth(false);
+  }
+
+  // GOOGLE SIGN IN FUNCTION
 
   Future handleGoogleSignIn() async {
     try {
@@ -162,7 +178,7 @@ class AuthenticationService extends ChangeNotifier {
       _authStateSubject.add(AuthState.Processing);
 
       FirebaseUser user = await _auth.currentUser();
-      print(user.providerData);
+      user.providerData[1].providerId == 'google.com' ? print("Yes google sign in"): print('Not google sign in');
 
       _auth.signOut();
       _loggedInUser = null;
