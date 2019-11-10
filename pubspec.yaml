@@ -10,9 +10,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-  # For state management
-  provider: ^2.0.1
-
   # For network interactions
   http: ^0.12.0+2
 
@@ -49,6 +46,15 @@ dependencies:
   # database for app
   cloud_firestore: ^0.12.9+6
 
+  #for google-sign in OAuth
+  google_sign_in: ^4.0.11
+
+  #for state management of app
+  provider: ^3.1.0+1
+
+  # for reactive programming
+  rxdart: ^0.22.6
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -72,6 +78,7 @@ flutter:
    - assets/images/card.svg
    - assets/images/teamwork.svg
    - assets/images/create-meetup.svg
+   - assets/images/emailLogin.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.

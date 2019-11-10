@@ -13,8 +13,11 @@ class _SignUpPageState extends State<SignUpPage>
     with SingleTickerProviderStateMixin {
   Animation animation;
   AnimationController animationController;
+
+  
   @override
   void initState() {
+  
     super.initState();
     animationController = AnimationController(
       duration: Duration(seconds: 3, milliseconds: 5),
@@ -24,6 +27,13 @@ class _SignUpPageState extends State<SignUpPage>
         parent: animationController, curve: Curves.fastOutSlowIn));
     animationController.forward();
   }
+
+  @override
+      void dispose() {
+        animationController.dispose();
+        super.dispose();
+      }
+
 
   @override
   Widget build(BuildContext context) {

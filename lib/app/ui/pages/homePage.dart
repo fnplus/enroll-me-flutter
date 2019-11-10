@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 
 class HomePage extends StatefulWidget {
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -37,7 +38,7 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: SingleChildScrollView(
-              child: Column(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
@@ -48,9 +49,8 @@ class _HomePageState extends State<HomePage> {
                   ClipPath(
                     clipper: WaveClipperTwo(),
                     child: Container(
-                      height: MediaQuery.of(context).size.height * 0.30,
-                      color: Colors.cyan
-                    ),
+                        height: MediaQuery.of(context).size.height * 0.30,
+                        color: Colors.cyan),
                   ),
                   Container(
                     height: MediaQuery.of(context).size.height * 0.25,
@@ -59,13 +59,12 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            SizedBox(height:MediaQuery.of(context).size.height * 0.02 ),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.02),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-
                 //TODO: Setup onTap Behaviours for all 4 cards by giving routeName
-                
+
                 CustomCard(
                   height: height,
                   width: width,
@@ -86,7 +85,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            SizedBox(height:MediaQuery.of(context).size.height * 0.02 ),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.02),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
@@ -110,7 +109,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            SizedBox(height:MediaQuery.of(context).size.height * 0.02 ),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.02),
           ],
         ),
       ),

@@ -1,15 +1,15 @@
+import 'package:enroll_me/app/services/authenticationService.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 
 class GoogleSignUpBtn extends StatelessWidget {
-  const GoogleSignUpBtn({
-    Key key,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
+    var _authService = Provider.of<AuthenticationService>(context);
     return GestureDetector(
-      onTap: () {
-        Navigator.pushReplacementNamed(context, 'homePage');
+      onTap: ()  async{
+        await _authService.handleGoogleSignIn();
       },
       child: Container(
         width: MediaQuery.of(context).size.width * 0.70,
