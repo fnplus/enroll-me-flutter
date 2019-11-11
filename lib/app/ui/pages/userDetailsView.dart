@@ -39,8 +39,8 @@ class _UserDetailsViewState extends State<UserDetailsView> {
           ],
         ),
         headerColor: Colors.indigo,
-        headerFlex: 2,
-        bodyFlex: 5,
+        headerFlex: 3,
+        bodyFlex: 6,
         header: ProfilePageHeader(user: service.loggedInUser),
 //***************************************** */
         //BODY STARTS HERE

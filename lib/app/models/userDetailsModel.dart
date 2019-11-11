@@ -3,8 +3,9 @@ class User {
   String email;
   String uid;
   String avatar;
+  bool isEmailVerified;
 
-  User({this.name, this.email, this.uid, this.avatar});
+  User({this.name, this.email, this.uid, this.avatar, this.isEmailVerified});
 
   User.fromMap(Map dataMap) {
     print(dataMap);
@@ -13,6 +14,7 @@ class User {
     name = dataMap['name'];
     email = dataMap['email'];
     avatar = dataMap['avatar'];
+    isEmailVerified = dataMap['isEmailVerified'];
     // privilege = dataMap['privilege'];
   }
 
@@ -23,6 +25,7 @@ class User {
     userMap['name'] = name;
     userMap['email'] = email;
     userMap['avatar'] = avatar;
+    userMap['isEmailVerified'] = isEmailVerified;
 
     return userMap;
   }

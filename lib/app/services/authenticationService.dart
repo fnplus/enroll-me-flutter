@@ -65,6 +65,7 @@ class AuthenticationService extends ChangeNotifier {
         'name': user.displayName,
         'email': user.email,
         'avatar': user.photoUrl,
+        'isEmailVerified': user.isEmailVerified
       };
 
       DocumentReference entryRef = await userDb.add(userDbEntry);
@@ -114,18 +115,17 @@ class AuthenticationService extends ChangeNotifier {
       print(user.displayName);
 
       await user.reload();
-      user = await _auth
-          .currentUser(); 
-    //(referred from https://stackoverflow.com/questions/50986191/flutter-firebase-auth-updateprofile-method-is-not-working)
+      user = await _auth.currentUser();
+      //(referred from https://stackoverflow.com/questions/50986191/flutter-firebase-auth-updateprofile-method-is-not-working)
 
       print("After reloading the profile: ");
       print(user.displayName);
       // await user.sendEmailVerification();
 
       // user.isEmailVerified
-      //     ? 
+      //     ?
       await processFirestoreEntryOfUser(user);
-          // : print("Email Not verified"); //TODO: Handle the not verified condition
+      // : print("Email Not verified"); //TODO: Handle the not verified condition
 
       updateAuthState();
     } catch (e) {
@@ -134,12 +134,12 @@ class AuthenticationService extends ChangeNotifier {
     }
   }
 
-  Future verifyEmail()async{
+  Future verifyEmail() async {
     FirebaseUser user = await _auth.currentUser();
     await user.sendEmailVerification();
   }
 
-  Future resetPass(String email)async{
+  Future resetPass(String email) async {
     _authStateSubject.add(AuthState.Processing);
     await _auth.sendPasswordResetEmail(email: email);
     updateSubjectToEmailAuth(false);
@@ -177,9 +177,7 @@ class AuthenticationService extends ChangeNotifier {
     try {
       _authStateSubject.add(AuthState.Processing);
 
-      FirebaseUser user = await _auth.currentUser();
-      user.providerData[1].providerId == 'google.com' ? print("Yes google sign in"): print('Not google sign in');
-
+      if (await _googleSignIn.isSignedIn()) _googleSignIn.signOut();
       _auth.signOut();
       _loggedInUser = null;
       updateAuthState();
