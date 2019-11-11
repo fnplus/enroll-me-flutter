@@ -121,9 +121,6 @@ class AuthenticationService extends ChangeNotifier {
       print("After reloading the profile: ");
       print(user.displayName);
       // await user.sendEmailVerification();
-
-      // user.isEmailVerified
-      //     ?
       await processFirestoreEntryOfUser(user);
       // : print("Email Not verified"); //TODO: Handle the not verified condition
 
@@ -134,9 +131,15 @@ class AuthenticationService extends ChangeNotifier {
     }
   }
 
-  Future verifyEmail() async {
+  Future<bool> verifyEmail() async {
     FirebaseUser user = await _auth.currentUser();
-    await user.sendEmailVerification();
+    try {
+      await user.sendEmailVerification();
+      return true;
+    } catch (e) {
+      print("Error caught: " + e.toString());
+      return false;
+    }
   }
 
   Future resetPass(String email) async {
