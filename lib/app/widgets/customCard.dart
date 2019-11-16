@@ -9,6 +9,7 @@ class CustomCard extends StatelessWidget {
   final bool isDark;
   final String imageName;
   final String routeName;
+  final String heroTag;
 
   const CustomCard(
       {Key key,
@@ -18,42 +19,46 @@ class CustomCard extends StatelessWidget {
       @required this.code,
       @required this.isDark,
       @required this.imageName,
-      this.routeName})
+      this.routeName,
+      @required this.heroTag})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: GestureDetector(
-        onTap: () {
-          // Navigator.of(context).pushNamed(routeName);
-        },
-        child: Material(
-          elevation: 3,
-          borderRadius: BorderRadius.circular(20),
-          child: Container(
-            height: height,
-            width: width,
-            alignment: Alignment.center,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                SvgPicture.asset('assets/images/' + imageName,
-                    height: height * 0.80),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: isDark
-                      ? Text(
-                          text,
-                          style: TextStyle(color: Colors.white),
-                        )
-                      : Text(text),
-                ),
-              ],
-            ),
-            decoration: BoxDecoration(
-              color: Color(code),
-              borderRadius: BorderRadius.circular(20),
+    return Hero(
+      tag: heroTag,
+      child: Center(
+        child: GestureDetector(
+          onTap: () {
+            Navigator.of(context).pushNamed(routeName);
+          },
+          child: Material(
+            elevation: 3,
+            borderRadius: BorderRadius.circular(20),
+            child: Container(
+              height: height,
+              width: width,
+              alignment: Alignment.center,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  SvgPicture.asset('assets/images/' + imageName,
+                      height: height * 0.80),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: isDark
+                        ? Text(
+                            text,
+                            style: TextStyle(color: Colors.white),
+                          )
+                        : Text(text),
+                  ),
+                ],
+              ),
+              decoration: BoxDecoration(
+                color: Color(code),
+                borderRadius: BorderRadius.circular(20),
+              ),
             ),
           ),
         ),

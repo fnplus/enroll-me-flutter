@@ -17,6 +17,12 @@ class _EmailSignInPageState extends State<EmailSignInPage> {
   void initState() {
     super.initState();
   }
+  @override
+  void dispose() {
+    _email.dispose();
+    _pass.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

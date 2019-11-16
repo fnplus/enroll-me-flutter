@@ -18,21 +18,25 @@ class ProfilePageHeader extends StatelessWidget {
           child: user.avatar != null
               ? Container(
                   decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(image: NetworkImage(user.avatar))),
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      fit: BoxFit.contain,
+                      image: NetworkImage(user.avatar),
+                    ),
+                  ),
                 )
               : Text(user.name[0].toUpperCase()),
-          radius: 40,
+          radius: 55,
           backgroundColor: Colors.yellow,
         ),
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(4.0),
           child: Text(
             user.name,
-            style: TextStyle(color: Colors.white, fontSize: 30),
+            style: TextStyle(color: Colors.white, fontSize: 28),
           ),
         ),
-        new EmailRow(auth: _auth, user: user),
+        EmailRow(auth: _auth, user: user),
       ],
     );
   }
@@ -64,7 +68,9 @@ class EmailRow extends StatelessWidget {
                       width: 10,
                     ),
                     Text(
-                        "Verification Email Sent Successfully to " + user.email, style: TextStyle(color: Colors.white),)
+                      "Verification Email Sent Successfully to " + user.email,
+                      style: TextStyle(color: Colors.white),
+                    )
                   ],
                 ),
               ))
@@ -76,17 +82,19 @@ class EmailRow extends StatelessWidget {
                     SizedBox(
                       width: 10,
                     ),
-                    Text("Cannot Send Email to " + user.email, style: TextStyle(color: Colors.white),)
+                    Text(
+                      "Cannot Send Email to " + user.email,
+                      style: TextStyle(color: Colors.white),
+                    )
                   ],
                 ),
               ));
-        // _auth.verifyEmail();
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(4.0),
             child: Text(
               user.email,
               style: TextStyle(color: Colors.white, fontSize: 20),

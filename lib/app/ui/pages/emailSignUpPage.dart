@@ -19,6 +19,15 @@ class _EmailSignUpPageState extends State<EmailSignUpPage> {
   }
 
   @override
+  void dispose() {
+    _email.dispose();
+    _name.dispose();
+    _pass.dispose();
+    _repass.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     var authService = Provider.of<AuthenticationService>(context);
     return Scaffold(

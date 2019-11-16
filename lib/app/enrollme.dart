@@ -1,4 +1,5 @@
 import 'package:enroll_me/app/services/authenticationService.dart';
+import 'package:enroll_me/app/ui/pages/createMeetup.dart';
 import 'package:enroll_me/app/ui/pages/emailSignInPage.dart';
 import 'package:enroll_me/app/ui/pages/emailSignUpPage.dart';
 import 'package:enroll_me/app/ui/pages/geekForm.dart';
@@ -6,6 +7,7 @@ import 'package:enroll_me/app/ui/pages/homePage.dart';
 import 'package:enroll_me/app/ui/pages/loadingPage.dart';
 import 'package:enroll_me/app/ui/pages/signUpPage.dart';
 import 'package:enroll_me/app/ui/pages/userDetailsView.dart';
+import 'package:enroll_me/app/widgets/loadingScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -42,10 +44,11 @@ class _EnrollMeState extends State<EnrollMe> {
           title: 'Enroll Me',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
-            primarySwatch: Colors.teal,
+            primarySwatch: Colors.cyan,
             brightness: Brightness.light,
           ),
           darkTheme: ThemeData.dark(),
+          // home: CreateMeetupPage(),
           initialRoute: '/',
           routes: {
             '/': (context) => LoadingPage(authService: _authenticationService),
@@ -54,7 +57,8 @@ class _EnrollMeState extends State<EnrollMe> {
             '/userDetails': (context) => UserDetailsView(),
             '/geekForm': (context) => GeekForm(),
             '/emailPage': (context) => EmailSignInPage(),
-            '/emailSignUp': (context) => EmailSignUpPage()
+            '/emailSignUp': (context) => EmailSignUpPage(),
+            '/create' :(context) => CreateMeetupPage()
           },
         ),
       ),

@@ -6,7 +6,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 
 class HomePage extends StatefulWidget {
-
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -21,16 +20,20 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: Colors.cyan,
         elevation: 0,
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: IconThemeData(color: Colors.white),
         title: Text(
           "MEET UP",
-          style: TextStyle(color: Color(0xFF424b54), letterSpacing: 5),
+          style: TextStyle(
+            // color: Color(0xFF424b54), 
+            color: Colors.white,
+            fontSize: 25,
+            letterSpacing: 5),
         ),
         centerTitle: true,
         actions: <Widget>[
           IconButton(
             icon: Icon(FontAwesomeIcons.graduationCap),
-            color: Color(0xFF424b54),
+            // color: Color(0xFF424b54),
             onPressed: () {
               Navigator.of(context).pushNamed("/userDetails");
             },
@@ -63,7 +66,6 @@ class _HomePageState extends State<HomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                //TODO: Setup onTap Behaviours for all 4 cards by giving routeName
 
                 CustomCard(
                   height: height,
@@ -73,6 +75,7 @@ class _HomePageState extends State<HomePage> {
                   text: "Meetups Planned",
                   imageName: 'teamwork.svg',
                   routeName: null,
+                  heroTag: 'planned',
                 ),
                 CustomCard(
                   code: 0xFF0b3c49,
@@ -81,7 +84,8 @@ class _HomePageState extends State<HomePage> {
                   text: "Create Meetups",
                   width: width,
                   imageName: 'create-meetup.svg',
-                  routeName: null,
+                  routeName: '/create',
+                  heroTag: 'create',
                 ),
               ],
             ),
@@ -97,6 +101,7 @@ class _HomePageState extends State<HomePage> {
                   width: width,
                   imageName: 'teamwork.svg',
                   routeName: null,
+                  heroTag: 'join',
                 ),
                 CustomCard(
                   code: 0xFFd8d4f2,
@@ -106,6 +111,7 @@ class _HomePageState extends State<HomePage> {
                   width: width,
                   imageName: 'card.svg',
                   routeName: null,
+                  heroTag: 'something',
                 ),
               ],
             ),

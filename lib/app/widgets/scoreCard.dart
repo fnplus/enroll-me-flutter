@@ -43,7 +43,7 @@ class ScoreCard extends StatelessWidget {
             return Padding(
               padding: const EdgeInsets.all(2.0),
               child: ItemTags(
-                activeColor: Colors.indigo,
+                activeColor: Color(0xff424b54),
                 textStyle: TextStyle(fontSize: 15),
                 key: Key(index.toString()),
                 index: index,

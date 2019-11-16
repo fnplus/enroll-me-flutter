@@ -59,7 +59,7 @@ class _LoadingPageState extends State<LoadingPage> {
     _authService.authStateSubject.close();
   }
 
-  Future<bool> _handlePop(){
+  Future _handlePop(){
     if (mounted) {
       _authService.authStateSubject.listen((AuthState authState) {
         print(authState);

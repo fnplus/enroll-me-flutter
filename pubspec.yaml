@@ -55,6 +55,9 @@ dependencies:
   # for reactive programming
   rxdart: ^0.22.6
 
+  #for loading animation
+  flutter_spinkit: "^4.0.0"
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

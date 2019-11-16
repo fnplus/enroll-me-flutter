@@ -22,9 +22,12 @@ class _UserDetailsViewState extends State<UserDetailsView> {
         topLeftCornerRadius: 20,
         topRightCornerRadius: 20,
         appBar: AppBar(
+          iconTheme: IconThemeData(
+            color: Colors.white
+          ),
           title: Text(
             "PROFILE",
-            style: TextStyle(letterSpacing: 3),
+            style: TextStyle(letterSpacing: 3, color: Colors.white),
           ),
           centerTitle: true,
           elevation: 0,
@@ -38,7 +41,7 @@ class _UserDetailsViewState extends State<UserDetailsView> {
             )
           ],
         ),
-        headerColor: Colors.indigo,
+        headerColor: Colors.cyan,
         headerFlex: 3,
         bodyFlex: 6,
         header: ProfilePageHeader(user: service.loggedInUser),

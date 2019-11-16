@@ -14,7 +14,16 @@ class CustomDrawer extends StatelessWidget {
             onDetailsPressed: () {
               //TODO: Navigate to page where user can update their details
             },
-            decoration: BoxDecoration(color: Color(0xFF424b54)),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Color(0xFF43cea2),
+                  Color(0xFF185a9d),
+                  ],
+                ),
+            ),
             currentAccountPicture: CircleAvatar(
               child: Container(
                 child: _authService.loggedInUser.avatar != null
@@ -31,13 +40,13 @@ class CustomDrawer extends StatelessWidget {
             ),
             accountEmail: Text(
               _authService.loggedInUser.email,
-              style: TextStyle(fontSize: 16),
+              style: TextStyle(fontSize: 15, color: Colors.white),
             ),
             accountName: Text(
               _authService.loggedInUser.name != null
                   ? _authService.loggedInUser.name
                   : "User ",
-              style: TextStyle(fontSize: 16),
+              style: TextStyle(fontSize: 15, color: Colors.white),
             ),
           ),
           Expanded(
@@ -57,7 +66,9 @@ class CustomDrawer extends StatelessWidget {
                     "Create a Meetup",
                     style: TextStyle(fontSize: 16),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    
+                  },
                 ),
                 ListTile(
                   leading: Icon(Icons.group_add),
