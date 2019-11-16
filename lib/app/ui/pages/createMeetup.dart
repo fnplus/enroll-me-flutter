@@ -14,8 +14,9 @@ class _CreateMeetupPageState extends State<CreateMeetupPage> {
     return Hero(
       tag: 'create',
       child: Scaffold(
-        drawer: CustomDrawer(),
+        // drawer: CustomDrawer(),
         appBar: AppBar(
+          brightness: Brightness.dark,
           backgroundColor: Colors.yellow,
           elevation: 0,
           iconTheme: IconThemeData(color: Colors.black),

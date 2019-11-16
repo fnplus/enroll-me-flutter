@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class FBSignUpBtn extends StatelessWidget {
-  const FBSignUpBtn({
+class PhoneButton extends StatelessWidget {
+  const PhoneButton({
     Key key,
   }) : super(key: key);
 
@@ -16,18 +16,18 @@ class FBSignUpBtn extends StatelessWidget {
         width: MediaQuery.of(context).size.width * 0.70,
         height: MediaQuery.of(context).size.height * 0.06,
         decoration: BoxDecoration(
-            color: Color(0xFF3b5998), borderRadius: BorderRadius.circular(20)),
+            color: Colors.amber, borderRadius: BorderRadius.circular(20)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Icon(
-              FontAwesomeIcons.facebookF,
+              FontAwesomeIcons.phone,
               color: Colors.white,
             ),
             Padding(
               padding: const EdgeInsets.all(4.0),
               child: Text(
-                "Sign up with Facebook",
+                "Register with Phone",
                 style: TextStyle(
                     fontFamily: "Product-Sans",
                     color: Colors.white,

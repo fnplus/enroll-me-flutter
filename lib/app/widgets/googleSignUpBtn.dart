@@ -12,8 +12,8 @@ class GoogleSignUpBtn extends StatelessWidget {
         await _authService.handleGoogleSignIn();
       },
       child: Container(
-        width: MediaQuery.of(context).size.width * 0.70,
-        height: MediaQuery.of(context).size.height * 0.06,
+        width: MediaQuery.of(context).size.width * 0.10,
+        height: MediaQuery.of(context).size.height * 0.05,
         decoration: BoxDecoration(
             color: Colors.blue[600], borderRadius: BorderRadius.circular(20)),
         child: Row(
@@ -30,19 +30,21 @@ class GoogleSignUpBtn extends StatelessWidget {
                     ),
                   )),
             ),
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Text(
-                "Sign up with Google",
-                style: TextStyle(
-                    fontFamily: "Product-Sans",
-                    color: Colors.white,
-                    fontSize: 18),
-              ),
-            ),
+           
           ],
         ),
       ),
     );
   }
 }
+
+//  Padding(
+//               padding: const EdgeInsets.all(4.0),
+//               child: Text(
+//                 "Continue with Google",
+//                 style: TextStyle(
+//                     fontFamily: "Product-Sans",
+//                     color: Colors.white,
+//                     fontSize: 18),
+//               ),
+//             ),

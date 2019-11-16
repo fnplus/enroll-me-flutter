@@ -1,6 +1,7 @@
 import 'package:enroll_me/app/widgets/emailSignUp.dart';
-import 'package:enroll_me/app/widgets/fbSignUpBtn.dart';
+import 'package:enroll_me/app/widgets/githubBtn.dart';
 import 'package:enroll_me/app/widgets/googleSignUpBtn.dart';
+import 'package:enroll_me/app/widgets/phoneBtn.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -14,10 +15,8 @@ class _SignUpPageState extends State<SignUpPage>
   Animation animation;
   AnimationController animationController;
 
-  
   @override
   void initState() {
-  
     super.initState();
     animationController = AnimationController(
       duration: Duration(seconds: 3, milliseconds: 5),
@@ -29,15 +28,15 @@ class _SignUpPageState extends State<SignUpPage>
   }
 
   @override
-      void dispose() {
-        animationController.dispose();
-        super.dispose();
-      }
-
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -53,11 +52,10 @@ class _SignUpPageState extends State<SignUpPage>
               child: Text(
                 "Enroll Me In!",
                 style: TextStyle(
-                  fontFamily: "Product-Sans",
-                  fontSize: 65,
-                  color: Color(0xFF424b54),
-                  fontWeight: FontWeight.bold
-                ),
+                    fontFamily: "Product-Sans",
+                    fontSize: 65,
+                    color: Color(0xFF424b54),
+                    fontWeight: FontWeight.bold),
               ),
             ),
           ),
@@ -66,17 +64,43 @@ class _SignUpPageState extends State<SignUpPage>
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                FBSignUpBtn(),
+                EmailSignUpBtn(),
                 SizedBox(
                   height: 20,
                 ),
-
-                //TODO: Setup Login Flow Method for all three Buttons
-                GoogleSignUpBtn(),
+                PhoneButton(),
                 SizedBox(
                   height: 20,
                 ),
-                EmailSignUpBtn()
+                Stack(
+                  fit: StackFit.loose,
+                  alignment: Alignment.center,
+                  children: <Widget>[
+                    Divider(
+                      indent: 65,
+                      endIndent: 65,
+                      color: Colors.black,
+                    ),
+                    Center(
+                      child: Container(
+                          color: Colors.white,
+                          width: MediaQuery.of(context).size.width * 0.3,
+                          child: Text("or continue with",
+                              textAlign: TextAlign.center)),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    GoogleSignUpBtn(),
+                    SizedBox(width: 15,),
+                    GithubBtn(),
+                  ],
+                ),
               ],
             ),
           ),

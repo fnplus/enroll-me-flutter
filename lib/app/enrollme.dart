@@ -46,6 +46,7 @@ class _EnrollMeState extends State<EnrollMe> {
           theme: ThemeData(
             primarySwatch: Colors.cyan,
             brightness: Brightness.light,
+            
           ),
           darkTheme: ThemeData.dark(),
           // home: CreateMeetupPage(),
@@ -58,7 +59,7 @@ class _EnrollMeState extends State<EnrollMe> {
             '/geekForm': (context) => GeekForm(),
             '/emailPage': (context) => EmailSignInPage(),
             '/emailSignUp': (context) => EmailSignUpPage(),
-            '/create' :(context) => CreateMeetupPage()
+            '/create': (context) => CreateMeetupPage()
           },
         ),
       ),

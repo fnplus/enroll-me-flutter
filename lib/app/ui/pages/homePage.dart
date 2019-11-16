@@ -18,6 +18,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       drawer: CustomDrawer(),
       appBar: AppBar(
+        brightness: Brightness.dark,
         backgroundColor: Colors.cyan,
         elevation: 0,
         iconTheme: IconThemeData(color: Colors.white),
@@ -107,7 +108,7 @@ class _HomePageState extends State<HomePage> {
                   code: 0xFFd8d4f2,
                   height: height,
                   isDark: false,
-                  text: "Something",
+                  text: "Search",
                   width: width,
                   imageName: 'card.svg',
                   routeName: null,

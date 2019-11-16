@@ -8,11 +8,13 @@ class CustomDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     var _authService = Provider.of<AuthenticationService>(context);
     return Drawer(
+      elevation: 10,
       child: Column(
         children: <Widget>[
           UserAccountsDrawerHeader(
             onDetailsPressed: () {
-              //TODO: Navigate to page where user can update their details
+              Navigator.of(context).pop();
+              Navigator.of(context).pushNamed('/geekForm');
             },
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -21,8 +23,8 @@ class CustomDrawer extends StatelessWidget {
                 colors: [
                   Color(0xFF43cea2),
                   Color(0xFF185a9d),
-                  ],
-                ),
+                ],
+              ),
             ),
             currentAccountPicture: CircleAvatar(
               child: Container(
@@ -52,14 +54,31 @@ class CustomDrawer extends StatelessWidget {
           Expanded(
             child: Column(
               children: <Widget>[
+
+                //GO TO USER PROFILE
+                ListTile(
+                  leading: Icon(FontAwesomeIcons.userAlt),
+                  title: Text(
+                    "User Profile",
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  onTap: () {
+                    Navigator.of(context).popAndPushNamed('/userDetails');
+                  },
+                ),
+                //GO TO MEETUPS PLANNED
                 ListTile(
                   leading: Icon(FontAwesomeIcons.peopleCarry),
                   title: Text(
                     "Meetups Planned",
                     style: TextStyle(fontSize: 16),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).popAndPushNamed('');
+                  },
                 ),
+
+                // GO TO CREATE MEETUP
                 ListTile(
                   leading: Icon(Icons.group_work),
                   title: Text(
@@ -67,16 +86,22 @@ class CustomDrawer extends StatelessWidget {
                     style: TextStyle(fontSize: 16),
                   ),
                   onTap: () {
-                    
+                    Navigator.of(context).popAndPushNamed('/create');
                   },
                 ),
+                //GO TO JOIN MEETUP
                 ListTile(
                   leading: Icon(Icons.group_add),
                   title: Text(
                     "Join a Meetup",
                     style: TextStyle(fontSize: 16),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                Divider(
+                  color: Colors.grey,
                 ),
                 ListTile(
                   leading: Icon(FontAwesomeIcons.signOutAlt),
@@ -85,6 +110,7 @@ class CustomDrawer extends StatelessWidget {
                     style: TextStyle(fontSize: 16),
                   ),
                   onTap: () {
+                    Navigator.of(context).pop();
                     showDialog(
                         context: context,
                         builder: (BuildContext context) => AlertDialog(
@@ -108,7 +134,7 @@ class CustomDrawer extends StatelessWidget {
                               ],
                             ));
                   },
-                )
+                ),
               ],
             ),
           )
