@@ -35,7 +35,7 @@ class _EnrollMeState extends State<EnrollMe> {
       child: MultiProvider(
         providers: [
           ChangeNotifierProvider<AuthenticationService>(
-            builder: (_) => _authenticationService,
+            create: (_) => _authenticationService,
           ),
         ],
         child: MaterialApp(
