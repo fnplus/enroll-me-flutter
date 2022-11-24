@@ -19,7 +19,7 @@ class AuthenticationService extends ChangeNotifier {
 
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
-  final CollectionReference userDb = Firestore.instance.collection('users');
+  final CollectionReference userDb = FirebaseFirestore.instance.collection('users');
 
   User _loggedInUser;
 
