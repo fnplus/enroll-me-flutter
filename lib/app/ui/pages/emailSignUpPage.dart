@@ -95,8 +95,12 @@ class RegisterBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+    return ElevatedButton(
+      style: ButtonStyle(
+        elevation: MaterialStateProperty.all(3),
+        backgroundColor: MaterialStateProperty.all(Color(0xFF401f3e)),
+        shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(18))),
+      ),
       onPressed: () async {
         print("Name received: " + _name.text);
         print("Email received: " + _email.text);
@@ -110,7 +114,7 @@ class RegisterBtn extends StatelessWidget {
         } else {
           // Handle the passwords not match case
           print("Both passwords do not match");
-          Scaffold.of(context).showSnackBar(SnackBar(
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             backgroundColor: Colors.red,
             content: Row(
               children: <Widget>[
@@ -128,12 +132,10 @@ class RegisterBtn extends StatelessWidget {
           ));
         }
       },
-      elevation: 3,
       child: Text(
         "Register",
         style: TextStyle(color: Colors.white),
       ),
-      color: Color(0xFF401f3e),
     );
   }
 }
