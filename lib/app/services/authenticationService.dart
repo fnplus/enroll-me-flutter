@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:enroll_me/app/models/userDetailsModel.dart';
+import 'package:enroll_me/app/models/userDetailsModel.dart' as UserModel;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -21,10 +21,10 @@ class AuthenticationService extends ChangeNotifier {
 
   final CollectionReference userDb = FirebaseFirestore.instance.collection('users');
 
-  User _loggedInUser;
+  UserModel.User _loggedInUser;
 
   //get current instance of user
-  User get loggedInUser => _loggedInUser;
+  UserModel.User get loggedInUser => _loggedInUser;
 
   PublishSubject<AuthState> _authStateSubject = PublishSubject();
 
@@ -40,7 +40,7 @@ class AuthenticationService extends ChangeNotifier {
   Future autoAuthenticateUser() async {
     // Change auth state to processing
     _authStateSubject.add(AuthState.Processing);
-    FirebaseUser user = await _auth.currentUser();
+    User user = await _auth.currentUser;
     if (user != null) {
       await processFirestoreEntryOfUser(user);
     }
@@ -48,33 +48,33 @@ class AuthenticationService extends ChangeNotifier {
     updateAuthState();
   }
 
-  Future processFirestoreEntryOfUser(FirebaseUser user) async {
+  Future processFirestoreEntryOfUser(User user) async {
     Map userData;
 
     // Check if user exists in collection
     QuerySnapshot checkQuery =
-        await userDb.where('uid', isEqualTo: user.uid).limit(1).getDocuments();
+        await userDb.where('uid', isEqualTo: user.uid).limit(1).get();
 
-    final List<DocumentSnapshot> results = checkQuery.documents;
+    final List<DocumentSnapshot> results = checkQuery.docs;
 
     if (results.length == 1)
-      userData = results[0].data;
+      userData = results[0].data as Map<String, dynamic>;
     else {
       Map<String, dynamic> userDbEntry = {
         'uid': user.uid,
         'name': user.displayName,
         'email': user.email,
-        'avatar': user.photoUrl,
-        'isEmailVerified': user.isEmailVerified
+        'avatar': user.photoURL,
+        'isEmailVerified': user.emailVerified
       };
 
       DocumentReference entryRef = await userDb.add(userDbEntry);
       DocumentSnapshot docSnap = await entryRef.snapshots().first;
-      userData = docSnap.data;
+      userData = docSnap.data as Map<String, dynamic>;
     }
 
     if (userData['uid'] != null) {
-      _loggedInUser = User.fromMap(userData);
+      _loggedInUser = UserModel.User.fromMap(userData);
       notifyListeners();
     }
   }
@@ -83,9 +83,10 @@ class AuthenticationService extends ChangeNotifier {
   Future signInWithEmail(String email, String password) async {
     try {
       _authStateSubject.add(AuthState.Processing);
-      AuthResult result = await (_auth.signInWithEmailAndPassword(
+
+      var result = await (_auth.signInWithEmailAndPassword(
           email: email, password: password));
-      FirebaseUser user = result.user;
+      User user = result.user;
       print(user.displayName);
       await processFirestoreEntryOfUser(user);
       updateAuthState();
@@ -99,7 +100,7 @@ class AuthenticationService extends ChangeNotifier {
   Future signUpWithEmail(String name, String email, String pass) async {
     try {
       _authStateSubject.add(AuthState.Processing);
-      FirebaseUser user = (await _auth.createUserWithEmailAndPassword(
+      User user = (await _auth.createUserWithEmailAndPassword(
         email: email,
         password: pass,
       ))
@@ -107,15 +108,12 @@ class AuthenticationService extends ChangeNotifier {
 
       print("Signed up: " + user.email);
 
-      UserUpdateInfo userUpdateInfo = UserUpdateInfo();
-
-      userUpdateInfo.displayName = name;
-      await user.updateProfile(userUpdateInfo);
+      await user.updateDisplayName(name);
       print("After updating the profile: ");
       print(user.displayName);
 
       await user.reload();
-      user = await _auth.currentUser();
+      user = _auth.currentUser;
       //(referred from https://stackoverflow.com/questions/50986191/flutter-firebase-auth-updateprofile-method-is-not-working)
 
       print("After reloading the profile: ");
@@ -135,7 +133,7 @@ class AuthenticationService extends ChangeNotifier {
   }
 
   Future verifyEmail() async {
-    FirebaseUser user = await _auth.currentUser();
+    User user = _auth.currentUser;
     await user.sendEmailVerification();
   }
 
@@ -154,12 +152,12 @@ class AuthenticationService extends ChangeNotifier {
       final GoogleSignInAuthentication googleAuth =
           await googleUser.authentication;
 
-      final AuthCredential credential = GoogleAuthProvider.getCredential(
+      final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
 
-      final FirebaseUser user =
+      final User user =
           (await _auth.signInWithCredential(credential)).user;
 
       print("Signed In " + user.displayName);
