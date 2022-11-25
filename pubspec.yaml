@@ -40,6 +40,8 @@ dependencies:
   # to get different custom shapes and borders
   flutter_custom_clippers: ^2.0.0
 
+  firebase_core: ^2.3.0
+
   # To authenticate users
   firebase_auth: ^4.1.3
 
