@@ -55,10 +55,11 @@ class AuthenticationService extends ChangeNotifier {
     QuerySnapshot checkQuery =
         await userDb.where('uid', isEqualTo: user.uid).limit(1).get();
 
-    final List<DocumentSnapshot> results = checkQuery.docs;
+    final List<QueryDocumentSnapshot> results = checkQuery.docs;
 
-    if (results.length == 1)
-      userData = results[0].data as Map<String, dynamic>;
+    if (results.length == 1){
+      userData = results[0].data() as Map<String, dynamic>;
+    }
     else {
       Map<String, dynamic> userDbEntry = {
         'uid': user.uid,
@@ -118,7 +119,7 @@ class AuthenticationService extends ChangeNotifier {
 
       print("After reloading the profile: ");
       print(user.displayName);
-      // await user.sendEmailVerification();
+      await user.sendEmailVerification();
 
       // user.isEmailVerified
       //     ?
