@@ -81,13 +81,13 @@ class CustomDrawer extends StatelessWidget {
                               content:
                                   Text("Are you sure you want to sign out?"),
                               actions: <Widget>[
-                                FlatButton(
+                                TextButton(
                                   child: Text("Cancel"),
                                   onPressed: () {
                                     Navigator.pop(context);
                                   },
                                 ),
-                                FlatButton(
+                                TextButton(
                                   child: Text("Yes"),
                                   onPressed: () {
                                     _authService.signOut();

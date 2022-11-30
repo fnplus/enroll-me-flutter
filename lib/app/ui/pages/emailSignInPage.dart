@@ -93,8 +93,12 @@ class LoginBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+    return ElevatedButton(
+      style: ButtonStyle(
+        elevation: MaterialStateProperty.all(3),
+        backgroundColor: MaterialStateProperty.all(Color(0xFF401f3e)),
+        shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(18))),
+      ),
       onPressed: () async {
         print("Email " + _email.text);
         print("Password " + _pass.text);
@@ -102,27 +106,25 @@ class LoginBtn extends StatelessWidget {
           await authService.signInWithEmail(_email.text, _pass.text);
         } 
         else if (_email.text.isEmpty && _pass.text.isEmpty) {
-          Scaffold.of(context).showSnackBar(SnackBar(
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text("Enter valid Email and Password"),
           ));
         } 
         else if (_email.text.isEmpty) {
-          Scaffold.of(context).showSnackBar(SnackBar(
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text("Please enter a valid Email ID"),
           ));
         } 
         else if (_pass.text.isEmpty) {
-          Scaffold.of(context).showSnackBar(SnackBar(
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text("Password cannot be empty"),
           ));
         }
       },
-      elevation: 3,
       child: Text(
         "Login",
         style: TextStyle(color: Colors.white),
       ),
-      color: Color(0xFF401f3e),
     );
   }
 }
@@ -151,7 +153,7 @@ class ForgotPass extends StatelessWidget {
           await authService.resetPass(_email.text);
         } else {
           // Show snackbar if email field is not filled
-          Scaffold.of(context).showSnackBar(SnackBar(
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             backgroundColor: Colors.red,
             content: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
